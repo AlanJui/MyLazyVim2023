@@ -15,10 +15,41 @@ keymap.set("n", "<c-s>", ":w<CR>", {})
 keymap.set("i", "<c-s>", "<Esc>:w<CR>a", {})
 
 --------------------------------------------------------------------
+-- Page Scrolling
+--------------------------------------------------------------------
+
+-- Better viewing
+-- keymap.set("n", "n", "nzzzv")
+-- keymap.set("n", "N", "Nzzzv")
+-- keymap.set("n", "g,", "g,zvzz")
+-- keymap.set("n", "g;", "g;zvzz")
+
+-- Scrolling
+keymap.set("n", "<C-d>", "<C-d>zz")
+keymap.set("n", "<C-u>", "<C-u>zz")
+
+--------------------------------------------------------------------
 -- Line editting
 --------------------------------------------------------------------
 -- Paste over currently selected text without yanking it
 keymap.set("v", "p", '"_dp')
+
+-- Paste
+keymap.set("n", "<localleader>p", "o<Esc>p", { desc = "Paste below" })
+keymap.set("n", "<localleader>P", "O<Esc>p", { desc = "Paste above" })
+
+-- Indent/Unident
+keymap.set("v", "<", "<gv")
+keymap.set("v", ">", ">gv")
+
+-- Auto indent
+keymap.set("n", "i", function()
+  if #vim.fn.getline(".") == 0 then
+    return [["_cc]]
+  else
+    return "i"
+  end
+end, { expr = true })
 
 -- Editting on Insert Mode
 keymap.set("i", "<M-,>", "<Right>,")
@@ -60,19 +91,6 @@ keymap.set("i", "<S-Down>", "<Esc>:m .+1<CR>")
 keymap.set("i", "<S-Up>", "<Esc>:m .-2<CR>")
 keymap.set("v", "<S-Down>", ":move '>+1<CR>gv-gv")
 keymap.set("v", "<S-Up>", ":move '<-2<CR>gv-gv")
-
--- Indent/Unident
-keymap.set("v", "<", "<gv")
-keymap.set("v", ">", ">gv")
-
--- Auto indent
-keymap.set("n", "i", function()
-  if #vim.fn.getline(".") == 0 then
-    return [["_cc]]
-  else
-    return "i"
-  end
-end, { expr = true })
 
 --------------------------------------------------------------------
 -- Windows navigation
@@ -130,7 +148,7 @@ keymap.set("t", "<Esc>", "<C-\\><C-n>")
 keymap.set("n", "<localleader>e", ":NvimTreeToggle<CR>") -- toggle file explorer
 
 -- telescope
-keymap.set("n", "<localleader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
+keymap.set("n", "<localleader>ff", "<cmd>Telescope find_files<cr>") -- find files within c]urrent working directory, respects .gitignore
 keymap.set("n", "<localleader>fs", "<cmd>Telescope live_grep<cr>") -- find string in current working directory as you type
 keymap.set("n", "<localleader>fc", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
 keymap.set("n", "<localleader>fb", "<cmd>Telescope buffers<cr>") -- list open buffers in current neovim instance
