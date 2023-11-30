@@ -40,7 +40,6 @@ return {
     version = false, -- last release is way too old
     event = "InsertEnter",
     dependencies = {
-      "onsails/lspkind.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
@@ -50,7 +49,6 @@ return {
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "ray-x/cmp-treesitter",
-      "onsails/lspkind.nvim",
     },
     opts = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
