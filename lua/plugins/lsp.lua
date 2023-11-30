@@ -67,6 +67,7 @@ return {
             },
           },
         },
+        pyright = {},
         lua_ls = {
           -- enabled = false,
           single_file_support = true,
