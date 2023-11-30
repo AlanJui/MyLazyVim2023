@@ -12,6 +12,9 @@ return {
       window = {
         mappings = {
           ["<space>"] = "none",
+          ["<tab>"] = "open",
+          ["l"] = "open",
+          ["h"] = "close_node",
         },
       },
       default_component_configs = {
