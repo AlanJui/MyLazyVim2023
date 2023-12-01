@@ -1,4 +1,27 @@
 return {
+  -- A work-in-progress Magit clone for Neovim that is geared toward the Vim philosophy.
+  {
+    "TimUntersberger/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "nvim-telescope/telescope.nvim", -- optional
+      "ibhagwan/fzf-lua", -- optional
+    },
+    cmd = "Neogit",
+    keys = {
+      { "<leader>gn", "<cmd>Neogit<cr>", desc = "Neogit" },
+    },
+    opts = {
+      integrations = {
+        diffview = true,
+      },
+      disable_commit_confirmation = true,
+    },
+    config = function()
+      require("custom.configs.neogit")
+    end,
+  },
   {
     "lewis6991/gitsigns.nvim",
     opts = {

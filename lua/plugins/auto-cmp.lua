@@ -49,6 +49,12 @@ return {
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "ray-x/cmp-treesitter",
+      {
+        "zbirenbaum/copilot-cmp",
+        config = function()
+          require("copilot_cmp").setup()
+        end,
+      },
     },
     opts = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
@@ -57,7 +63,8 @@ return {
       local defaults = require("cmp.config.default")()
 
       local has_words_before = function()
-        unpack = unpack or table.unpack
+        ---@diagnostic disable-next-line: deprecated
+        unpack = unpack or table.unpack -- luacheck: globals unpack (compatibility with Lua 5.1)
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
       end
@@ -142,17 +149,53 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
+    lazy = false,
+    event = "InsertEnter",
+    cmd = "Copilot",
+    build = ":Copilot auth",
     opts = {
-      suggestion = { enabled = false },
-      panel = { enabled = false },
+      -- Possible configurable fields can be found on:
+      -- https://github.com/zbirenbaum/copilot.lua#setup-and-configuration
+      suggestion = {
+        -- enable = false,
+        enabled = true,
+        auto_trigger = true,
+        debounce = 75,
+        keymap = {
+          accept = "<C-]>",
+          accept_word = false,
+          accept_line = false,
+          next = "<M-]>",
+          prev = "<M-[>",
+          dismiss = "<M-\\>",
+        },
+      },
+      panel = {
+        -- enable = false,
+        auto_refresh = false,
+        keymap = {
+          jump_prev = "[[",
+          jump_next = "]]",
+          accept = "<CR>",
+          refresh = "gr",
+          open = "<M-CR>",
+        },
+        layout = {
+          position = "bottom", -- | top | left | right
+          ratio = 0.4,
+        },
+      },
       filetypes = {
-        markdown = true,
-        help = true,
+        yaml = true,
+        markdown = false,
+        help = false,
+        gitcommit = true,
+        gitrebase = false,
+        hgcommit = false,
+        svn = false,
+        cvs = false,
+        ["."] = false,
       },
     },
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-    opts = {},
   },
 }
