@@ -56,7 +56,10 @@ return {
       enable = true,
       ft = { "markdown" },
       cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
-      build = "cd app && yarn install",
+      -- build = "cd app && yarn install",
+      build = function()
+        vim.fn["mkdp#util#install"]()
+      end,
       keys = {
         { "<leader>um", "+MarkDown" },
         { "<leader>umP", "<cmd> MarkdownPreview<CR>", desc = "Open Preview" },
