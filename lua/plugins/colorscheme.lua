@@ -1,14 +1,16 @@
 return {
-  -- add gruvbox
   { "ellisonleao/gruvbox.nvim" },
 
   {
     "folke/tokyonight.nvim",
+    lazy = true,
     opts = { style = "moon" },
   },
 
   {
     "catppuccin/nvim",
+    lazy = true,
+    name = "catppuccin",
     opts = {
       integrations = {
         aerial = true,
@@ -45,15 +47,6 @@ return {
         treesitter_context = true,
         which_key = true,
       },
-    },
-  },
-
-  -- Configure LazyVim to load gruvbox
-  -- colorscheme = "catppuccin",
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "tokyonight",
     },
   },
 }
