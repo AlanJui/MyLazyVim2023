@@ -158,7 +158,11 @@ return {
           -- make the language server recognize "vim" global
           diagnostics = {
             globals = { "vim", "hs" },
-            disable = { "incomplete-signature-doc", "trailing-space" },
+            disable = {
+              "incomplete-signature-doc",
+              "trailing-space",
+              "no-unknown",
+            },
             -- enable = false,
             groupSeverity = {
               strong = "Warning",
