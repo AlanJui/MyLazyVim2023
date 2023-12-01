@@ -7,25 +7,28 @@ return {
     dependencies = {
       "rafamadriz/friendly-snippets",
     },
-    opts = {
-      history = true,
-      delete_check_envents = "TextChanged",
-    },
+    -- opts = {
+    --   history = true,
+    --   delete_check_envents = "TextChanged",
+    -- },
     config = function()
       -- load snippets paths
       -- this can be used if your configuration lives in ~/.config/nvim
       -- if your configuration lives in ~/.config/astronvim, the full path
       -- must be specified in the next line
-      local config_dir = vim.fn.stdpath("config")
       local runtime_dir = vim.fn.stdpath("data")
       local package_root = runtime_dir .. "/lazy"
+      local config_dir = vim.fn.stdpath("config")
+      vim.g.vscode_snippets_path = {
+        config_dir .. "/my_snippets",
+        package_root .. "/friendly-snippets",
+      }
 
+      -- require("luasnip.loaders.from_vscode").lazy_load({
+      --   paths = vim.g.vscode_snippets_path,
+      -- })
       require("luasnip.loaders.from_vscode").lazy_load({
-        paths = {
-          -- "./lua/user/snippets",
-          config_dir .. "/my-snippets",
-          package_root .. "/friendly-snippets",
-        },
+        paths = { "./my_snippets" },
       })
 
       -- extends filetypes supported by snippets
@@ -79,8 +82,22 @@ return {
           end,
         },
         mapping = cmp.mapping.preset.insert({
-          ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-          ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+          -- go to previous placeholder in the snippet
+          ["<C-p>"] = cmp.mapping(function(fallback)
+            if luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+          -- go to next placeholder in the snippet
+          ["<C-n>"] = cmp.mapping(function(fallback)
+            if luasnip.jumpable(1) then
+              luasnip.jump(1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
           ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
           ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),

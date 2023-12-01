@@ -2,9 +2,6 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
--- vscode format i.e json files
-vim.g.vscode_snippets_path = vim.fn.stdpath("config") .. "/my_snippets"
-
 local opt = vim.opt
 local set = vim.opt -- global options
 -- local cmd = vim.cmd -- execute Vim commands
