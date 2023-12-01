@@ -1,5 +1,11 @@
 return {
   {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup()
+    end,
+  },
+  {
     "rcarriga/nvim-notify",
     opts = {
       timeout = 3000,
