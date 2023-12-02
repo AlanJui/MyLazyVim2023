@@ -1,49 +1,4 @@
 return {
-  -- {
-  --   "nvim-neotest/neotest-python",
-  -- },
-  {
-    "linux-cultist/venv-selector.nvim",
-    dependencies = {
-      "neovim/nvim-lspconfig",
-      "nvim-telescope/telescope.nvim",
-      "mfussenegger/nvim-dap-python",
-    },
-    event = "VeryLazy",
-    cmd = "VenvSelect",
-    keys = {
-      { "<leader>cv", "<cmd>:VenvSelect<cr>", desc = "Select VirtualEnv" },
-    },
-    opts = function(_, opts)
-      if require("lazyvim.util").has("nvim-dap-python") then
-        opts.dap_enabled = true
-      end
-      return vim.tbl_deep_extend("force", opts, {
-        name = {
-          "venv",
-          ".venv",
-          "env",
-          ".env",
-        },
-      })
-    end,
-  },
-  {
-    "nvim-neotest/neotest",
-    optional = true,
-    dependencies = {
-      "nvim-neotest/neotest-python",
-    },
-    opts = {
-      adapters = {
-        ["neotest-python"] = {
-          -- Here you can specify the settings for the adapter, i.e.
-          runner = "pytest",
-          python = ".venv/bin/python",
-        },
-      },
-    },
-  },
   {
     "mfussenegger/nvim-dap-python",
     keys = {
@@ -64,13 +19,14 @@ return {
         ft = "python",
       },
     },
-    config = function()
+    config = function(_, opts)
+      local dap = require("dap")
+
       -- configure DAP Adapter
       local debugpy_path = require("mason-registry").get_package("debugpy"):get_install_path()
       require("dap-python").setup(debugpy_path .. "/venv/bin/python")
 
       -- configure configurations of dap Adapter
-      local dap = require("dap")
       local dap_configurations = {
         {
           type = "python",

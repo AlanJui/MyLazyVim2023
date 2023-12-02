@@ -117,9 +117,6 @@ keymap.set("n", "<M-Right>", "<cmd>wincmd ><CR>")
 keymap.set("n", "<C-w>i", ":tabnew %<CR>")
 keymap.set("n", "<C-w>o", ":tabclose<CR>")
 
--- maximizer window
-keymap.set("n", "<localleader>sm", ":MaximizerToggle<CR>") -- close current split window
-
 --------------------------------------------------------------------
 -- Buffers
 --------------------------------------------------------------------

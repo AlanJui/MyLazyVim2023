@@ -136,6 +136,29 @@ return {
     lspconfig["pyright"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
+      root_dir = function(...)
+        return require("lspconfig.util").root_pattern(".git")(...)
+      end,
+      filetypes = { "python" },
+      single_file_support = true,
+      settings = {
+        python = {
+          analysis = {
+            autoSearchPaths = true,
+            diagnosticMode = "workspace",
+            useLibraryCodeForTypes = true,
+            typeCheckingMode = "off",
+            logLevel = "Error",
+          },
+          linting = {
+            pylintArgs = {
+              "--load-plugins=pylint_django",
+              "--load-plugins=pylint_dango.checkers.migrations",
+              "--errors-only",
+            },
+          },
+        },
+      },
     })
 
     -- configure python server
@@ -153,6 +176,9 @@ return {
     lspconfig["lua_ls"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
+      root_dir = function(...)
+        return require("lspconfig.util").root_pattern(".git")(...)
+      end,
       settings = { -- custom settings for lua
         Lua = {
           -- make the language server recognize "vim" global
@@ -162,6 +188,11 @@ return {
               "incomplete-signature-doc",
               "trailing-space",
               "no-unknown",
+              "lowercase-global",
+              "unused-local",
+              "missing-fields",
+              "undefined-doc-name",
+              "assign-type-mismatch",
             },
             -- enable = false,
             groupSeverity = {
