@@ -46,10 +46,13 @@ return {
           "Go to Implementation",
         },
         ---------------------------------------------------------------------------
+        ["<leader>dP"] = { name = "+Python" },
         ["<leader>f"] = { name = "+file/find" },
         ["<leader>g"] = { name = "+git" },
         ["<leader>gh"] = { name = "+hunks" },
         ["<leader>q"] = { name = "+quit/session" },
+        ["<leader>r"] = { name = "+run" },
+        ["<leader>rd"] = { name = "+Django" },
         ["<leader>s"] = { name = "+search" },
         ["<leader>u"] = { name = "+ui" },
         ["<leader>w"] = { name = "+windows" },
