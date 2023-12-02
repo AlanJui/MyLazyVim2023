@@ -27,19 +27,41 @@ return {
     mason_lspconfig.setup({
       -- list of servers for mason to install
       ensure_installed = {
+        -------------------------------------------------------------------
+        -- lua stuff
+        -------------------------------------------------------------------
+        "lua_ls",
+        -------------------------------------------------------------------
+        -- Python
+        -------------------------------------------------------------------
+        "pyright", -- LSP Server
+        -------------------------------------------------------------------
+        -- web dev stuff
+        -------------------------------------------------------------------
         "tsserver",
+        "emmet_ls",
         "html",
         "cssls",
         "tailwindcss",
-        "svelte",
-        "lua_ls",
-        "graphql",
-        "emmet_ls",
-        "prismals",
-        "pyright",
+        "eslint",
+        "prismals", --Next-generation ORM for Node.js & TypeScript
+        "graphql", -- GraphQL: A query language for your API
+        "svelte", -- Svelte language server: Web frontend compiler
+        -------------------------------------------------------------------
+        -- c/cpp stuff
+        -------------------------------------------------------------------
+        "clangd",
+        -------------------------------------------------------------------
+        -- Configurations & Documentation
+        -------------------------------------------------------------------
         "taplo", -- TOML
-        "yamlls",
-        "marksman",
+        "yamlls", --
+        "marksman", -- Markdown LS
+        -------------------------------------------------------------------
+        -- Misc.
+        -------------------------------------------------------------------
+        "jqls",
+        "bashls", -- Bash LS
       },
       -- auto-install configured servers (with lspconfig)
       automatic_installation = true, -- not the same as ensure_installed
@@ -49,11 +71,13 @@ return {
       ensure_installed = {
         "prettier", -- prettier formatter
         "stylua", -- lua formatter
+        "luacheck", -- lua linter
+        "ruff", -- Python Linter
         "isort", -- python formatter
         "black", -- python formatter
         "pylint", -- python linter
         "eslint_d", -- js linter
-        "luacheck",
+        "clang-format",
       },
     })
   end,

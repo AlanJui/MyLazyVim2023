@@ -7,6 +7,7 @@ return {
       ensure_installed = {
         "bash",
         "c",
+        "css",
         "diff",
         "html",
         "javascript",
@@ -26,6 +27,7 @@ return {
         "typescript",
         "vim",
         "vimdoc",
+        "vue",
         "yaml",
       },
       incremental_selection = {
